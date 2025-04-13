@@ -10,6 +10,13 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <ApplicationIcon>Images\Captura.ico</ApplicationIcon>
     <Prefer32Bit>false</Prefer32Bit>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <RunAnalyzersDuringBuild>True</RunAnalyzersDuringBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <IncludeSymbols>False</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackAsTool>False</PackAsTool>
+    <PackageTags>rsc</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <Resource Include="Images\Logo.png" />
