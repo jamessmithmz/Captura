@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using Captura.Models;
-using Ookii.Dialogs;
+// using Ookii.Dialogs.Wpf;
 
 namespace Captura.Windows
 {
@@ -9,15 +9,16 @@ namespace Captura.Windows
     {
         public string PickFolder(string Current, string Description)
         {
-            using (var dlg = new VistaFolderBrowserDialog
+            //using (var dlg = new VistaFolderBrowserDialog
+            //{
+            //    SelectedPath = Current,
+            //    UseDescriptionForTitle = true,
+            //    Description = Description
+            //})
+            var dlg = new Microsoft.WindowsAPICodePack.Dialogs.CommonOpenFileDialog { IsFolderPicker = true, Multiselect = false };
             {
-                SelectedPath = Current,
-                UseDescriptionForTitle = true,
-                Description = Description
-            })
-            {
-                if (dlg.ShowDialog() == DialogResult.OK)
-                    return dlg.SelectedPath;
+                if (dlg.ShowDialog() == Microsoft.WindowsAPICodePack.Dialogs.CommonFileDialogResult.Ok) //  System.Windows.Forms.DialogResult.OK)
+                    return dlg.FileName;
             }
 
             return null;

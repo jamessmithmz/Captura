@@ -10,12 +10,15 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FFMpegCore" Version="5.2.0" />
     <PackageReference Include="MediaFoundation" Version="3.1.0" />
-    <PackageReference Include="Ookii.Dialogs.WindowsForms" Version="1.0.0" />
+    <PackageReference Include="Ookii.Dialogs.WindowsForms" Version="4.0.0" />
     <PackageReference Include="DirectShowLib" Version="1.0.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
     <PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
     <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
     <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
     <PackageReference Include="SharpDX.MediaFoundation" Version="4.2.0" />
+    <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
   </ItemGroup>
 </Project>

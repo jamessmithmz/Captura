@@ -5,6 +5,9 @@ using SharpAvi.Codecs;
 using SharpAvi.Output;
 using AviInternalWriter = SharpAvi.Output.AviWriter;
 
+using FFMpegCore.Enums;
+using FFMpegCore;
+
 namespace Captura.SharpAvi
 {
     /// <summary>
@@ -78,23 +81,34 @@ namespace Captura.SharpAvi
             {
                 // MotionJpegVideoStream implementation allocates multiple WriteableBitmap for every thread
                 // Use SingleThreadWrapper to reduce allocation
-                var encoderFactory = new Func<IVideoEncoder>(() => new MotionJpegVideoEncoderWpf(Width, Height, _codec.Quality));
-                var encoder = new SingleThreadedVideoEncoderWrapper(encoderFactory);
-
-                _videoStream = _writer.AddEncodingVideoStream(encoder, true, Width, Height);
+                // var encoderFactory = new Func<IVideoEncoder>(() => new MJpegImageSharpVideoEncoder MotionJpegVideoEncoderWpf(Width, Height, _codec.Quality));
+                // var encoder = new SingleThreadedVideoEncoderWrapper(encoderFactory);
+                                
+                //_videoStream = _writer.AddEncodingVideoStream(encoder, true, Width, Height);
+                _videoStream = _writer.AddMJpegWpfVideoStream(Width, Height, _codec.Quality);
             }
             else
             {
-                _videoStream = _writer.AddMpeg4VideoStream(Width, Height,
+                _videoStream = _writer.AddMpeg4VcmVideoStream(Width, Height, 
                     (double)_writer.FramesPerSecond,
                     // It seems that all tested MPEG-4 VfW codecs ignore the quality affecting parameters passed through VfW API
                     // They only respect the settings from their own configuration dialogs, and Mpeg4VideoEncoder currently has no support for this
-                    0,
-                    _codec.Quality,
+                    quality: _codec.Quality,
+                    codec: _codec.FourCC,
                     // Most of VfW codecs expect single-threaded use, so we wrap this encoder to special wrapper
                     // Thus all calls to the encoder (including its instantiation) will be invoked on a single thread although encoding (and writing) is performed asynchronously
-                    _codec.FourCC,
-                    true);
+                    forceSingleThreadedAccess: true);
+
+                //_videoStream = _writer.AddMpeg4VideoStream(Width, Height,
+                //    (double)_writer.FramesPerSecond,
+                //    // It seems that all tested MPEG-4 VfW codecs ignore the quality affecting parameters passed through VfW API
+                //    // They only respect the settings from their own configuration dialogs, and Mpeg4VideoEncoder currently has no support for this
+                //    0,
+                //    _codec.Quality,
+                //    // Most of VfW codecs expect single-threaded use, so we wrap this encoder to special wrapper
+                //    // Thus all calls to the encoder (including its instantiation) will be invoked on a single thread although encoding (and writing) is performed asynchronously
+                //    _codec.FourCC,
+                //    true);
             }
 
             _videoStream.Name = "Video";

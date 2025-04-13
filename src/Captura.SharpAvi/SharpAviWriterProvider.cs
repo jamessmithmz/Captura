@@ -1,9 +1,10 @@
-﻿using SharpAvi.Codecs;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Captura.Video;
+using SharpAvi.Codecs;
 
 namespace Captura.SharpAvi
 {
@@ -18,7 +19,7 @@ namespace Captura.SharpAvi
             yield return new SharpAviItem(AviCodec.Uncompressed, "Uncompressed Avi");
             yield return new SharpAviItem(AviCodec.Lagarith, "Lagarith codec needs to be installed manually and configured to use RGB mode with Null Frames disabled.");
 
-            foreach (var codec in Mpeg4VideoEncoderVcm.GetAvailableCodecs())
+            foreach (var codec in Mpeg4VcmVideoEncoder.GetAvailableCodecs())
                 yield return new SharpAviItem(new AviCodec(codec.Codec, codec.Name), "");
         }
 

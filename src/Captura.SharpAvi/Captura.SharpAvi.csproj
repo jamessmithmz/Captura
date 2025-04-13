@@ -6,6 +6,9 @@
     <ProjectReference Include="..\Captura.Base\Captura.Base.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SharpAvi" Version="2.1.2" />
+    <PackageReference Include="FFMpegCore" Version="5.2.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.1" />
+    <PackageReference Include="SharpAvi" Version="3.0.1" />
+    <PackageReference Include="SharpAvi.ImageSharp" Version="3.0.0" />
   </ItemGroup>
 </Project>
